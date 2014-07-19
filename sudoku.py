@@ -20,7 +20,7 @@ class Sudoku:
             for j, col in enumerate(row):
                 if j == 3 or j == 6:
                     row_string += "| "
-                row_string += row[j] + " "
+                row_string += str(row[j]) + " "
             print(row_string)
             if i == 2 or i == 5:
                 print(line)
@@ -89,8 +89,8 @@ class Sudoku:
         box = self.return_box(box_num)
         for board_num in box:
             if num == board_num:
-                return true
-        return false
+                return True
+        return False
         
     def check_column(self, num, num_col):
         """
@@ -99,8 +99,8 @@ class Sudoku:
         col = self.return_col(num_col)
         for board_num in col:
             if num == board_num:
-                return true
-        return false
+                return True
+        return False
 
     def check_row(self, num, num_row):
         """
@@ -109,8 +109,8 @@ class Sudoku:
         row = self.return_row(num_row)
         for board_num in row:
             if num == board_num:
-                return true
-        return false
+                return True
+        return False
         
     def what_box(self, i, j):
         if i <= 2:
@@ -139,40 +139,40 @@ class Sudoku:
 
 #Michelle's space
 
-    def done(board):
+    def done(self):
         print("Solution is:")
         board.printBoard()
         return True
 
-    def solve(board):
+    def solve(self):
         """
           Backtracking algorithm for the sudoku solver. Takes in a Sudoku board;
           returns true iff algorithm successful, false otherwise.
         """
         # If board is filled, board is trivially solved
-        if board.check_full_board():
+        if self.check_full_board():
             return done(board)
 
         # Iterate over every square in the board
-        for row in range(Sudoku.num_rows):
-            for col in range(Sudoku.num_columns):
+        for row in range(self.num_rows):
+            for col in range(self.num_columns):
 
                 # If square is empty, begin plugging in possible values
-                if board.check_empty_space(row, col):
+                if self.check_empty_space(row, col):
                     for val in range(1, 10):
-                        if not check_row(val, row) and \
-                           not check_col(val, col) and \
-                           not check_box(val, what_box(row, col)):
-                            board.board[row][col] = val
+                        if not self.check_row(val, row) and \
+                           not self.check_column(val, col) and \
+                           not self.check_box(val, self.what_box(row, col)):
+                            self.board[row][col] = val
                         
-                            if solve(board):
-                                return done(board)
+                            if self.solve():
+                                return self.done()
                         
                             # Didn't work; undo assigment
-                            board.board[row][col] = ' '
+                            self.board[row][col] = ' '
 
         # Bad path; backtrack
-        return False;
+        return False
 
 
 #end of Michelle's space
@@ -210,7 +210,8 @@ class Sudoku:
         for row in range(self.num_rows):
             for col in range(self.num_columns):
                 num = random.randrange(10)
-                self.place_num(num, row, col)
+                if num != 0:
+                    self.place_num(num, row, col)
 
 
 
