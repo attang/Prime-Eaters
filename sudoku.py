@@ -5,7 +5,7 @@ class Sudoku:
 	num_columns = 9
 
 	def __init__(self):
-		self.board = []
+		self.board = [] #board[row][col]
 		self.count_list = [0,0,0,0,0,0,0,0,0]
 		for i in range(self.num_rows):
 			self.board.append([' '] * self.num_columns)
@@ -13,15 +13,33 @@ class Sudoku:
 	def get_board(self):
 		return self.board
 
-	def check_empty_space(board, row, column):
+	def check_empty_space(self, board, row, column):
 		return self.board[row][column] == ' '
 
 	def check_full_board(self, board): #rows then columns
 		for row in self.board:
 			for column_of_row in row:
-				if column_of_row == ' '
+				if column_of_row == ' ':
 					return False
 		return True
+
+	def return_row(self, num, board):
+		result = []
+		for i in range(num_columns):
+			result.append(self.board[num][i])
+		return result
+
+	def return_col(self, num, board):
+		result = []
+		for i in range(num_rows):
+			result.append(self.board[i][num])
+		return result
+
+	def return_box(self, num, board):
+		'''boxes go 1, 2, 3
+					4, 5, 6
+					7, 8, 9'''
+
 
 	def check_3x3(box, board):
 		'''checks whether the 3x3 grid (box) has the number in it
@@ -29,21 +47,21 @@ class Sudoku:
 
 
 	def place_num(board, num, row, column):
-
+		self.board[row]
 
 	def generate_random_board(self):
-		while min(count_list) > 9: #checks if there's a number not used 9 times
-			num_to_add = randrange(9) + 1
-			if self.count_list[num_to_add-1] !> 10:
-				if check_3x3(self.board):
+		# while min(count_list) > 9: #checks if there's a number not used 9 times
+		# 	num_to_add = randrange(9) + 1
+		# 	if self.count_list[num_to_add-1] !> 10:
+		# 		if check_3x3(self.board):
 					#put number in a place on the board
 
 
 #make some way to add numbers to the board
 
-board = Sudoku()
-print(board.board)
-board.get_board()
+# board = Sudoku()
+# print(board.board)
+# board.get_board()
 
 
 class Solver(Sudoku):
