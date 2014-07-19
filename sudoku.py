@@ -13,41 +13,47 @@ class Sudoku:
 	def get_board(self):
 		return self.board
 
-	def check_empty_space(self, board, row, column):
+	def check_empty_space(self, row, column):
 		return self.board[row][column] == ' '
 
-	def check_full_board(self, board): #rows then columns
+	def check_full_board(self): #rows then columns
 		for row in self.board:
 			for column_of_row in row:
 				if column_of_row == ' ':
 					return False
 		return True
 
-	def return_row(self, num, board):
+	def return_row(self, num_row):
 		result = []
 		for i in range(num_columns):
-			result.append(self.board[num][i])
+			result.append(self.board[num_row][i])
 		return result
 
-	def return_col(self, num, board):
+	def return_col(self, num_col):
 		result = []
 		for i in range(num_rows):
-			result.append(self.board[i][num])
+			result.append(self.board[i][num_col])
 		return result
 
-	def return_box(self, num, board):
+	def return_box(self, num):
 		'''boxes go 1, 2, 3
 					4, 5, 6
 					7, 8, 9'''
+		result = []
+		three = [0, 1, 2]
+		for a in three:
+			for b in three:
+				result += self.board[a+((num-1)//3*3)][b+(num%3-1)*3]
+		return result
 
 
-	def check_3x3(box, board):
+	def check_3x3(self, box):
 		'''checks whether the 3x3 grid (box) has the number in it
 			returns True or False'''
 
 
-	def place_num(board, num, row, column):
-		self.board[row]
+	def place_num(self, num, row, column):
+		self.board[row][column] = num
 
 	def generate_random_board(self):
 		# while min(count_list) > 9: #checks if there's a number not used 9 times
