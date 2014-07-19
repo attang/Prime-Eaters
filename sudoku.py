@@ -141,7 +141,7 @@ class Sudoku:
 
     def done(self):
         print("Solution is:")
-        board.printBoard()
+        self.print_board()
         return True
 
     def solve(self):
@@ -151,7 +151,7 @@ class Sudoku:
         """
         # If board is filled, board is trivially solved
         if self.check_full_board():
-            return done(board)
+            return self.done
 
         # Iterate over every square in the board
         for row in range(self.num_rows):
@@ -211,7 +211,7 @@ class Sudoku:
             for col in range(self.num_columns):
                 num = random.randrange(10)
                 if num != 0:
-                    self.place_num(num, row, col)
+                    self.place_num(num, row, col)    
 
 
 
