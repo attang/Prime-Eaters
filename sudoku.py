@@ -19,9 +19,9 @@ class Sudoku:
                 if (j == 3 or j == 6):
                     rowString += "| "
                 rowString += row[j] + " "
-            print rowString
+            print(rowString)
             if (i == 2 or i == 5):
-                print line
+                print(line)
 
     def get_board(self):
         return self.board
@@ -53,23 +53,20 @@ class Sudoku:
         return result
 
     def return_box(self, num):
-      """
-        Returns a 3x3 subgrid of the board as a list.
-        Board indexed as:
-                            1 2 3
-                            4 5 6
-                            7 8 9,
-        where each index represents a 3x3 subgrid.
-      """
+        """
+          Returns a 3x3 subgrid of the board as a list.
+          Board indexed as:
+                              1 2 3
+                              4 5 6
+                              7 8 9,
+          where each index represents a 3x3 subgrid.
+        """
         result = []
         three = [0, 1, 2]
         for a in three:
             for b in three:
                 result += self.board[a+((num-1)//3*3)][b+(num%3-1)*3]
         return result
-
-    def check_3x3(self, box):
-      """Returns true iff the 3x3 subgrid BOX contains NUM."""
 
     def place_num(self, num, row, column):
         self.board[row][column] = num
@@ -80,45 +77,56 @@ class Sudoku:
         #   if self.count_list[num_to_add-1] !> 10:
         #       if check_3x3(self.board):
                     #put number in a place on the board
+        return 0
                           
 #Allan's space
 
- def check_box(self, num, box_num):
-    # this method checks if a specific box already has a specific number
-    # @self is the board object
-    # @num is the specific number being checked
-    # @box_num is the box number of the board in row major order, starting from 1
-    # @return returns true if the box already has the number, false otherwise       
-        box = self.return_box(self, box_num):
+    def check_box(self, num, box_num):
+        # this method checks if a specific box already has a specific number
+        # @self is the board object
+        # @num is the specific number being checked
+        # @box_num is the box number of the board in row major order, starting from 1
+        # @return returns true if the box already has the number, false otherwise       
+        box = self.return_box(self, box_num)
     
 #end of Allan's space 
 
 #Michelle's space
 
+    def done(board):
+        print("Solution is:")
+        board.printBoard()
+        return True
 
+    def solve(board):
+        """
+          Backtracking algorithm for the sudoku solver. Takes in a Sudoku board;
+          returns true iff algorithm successful, false otherwise.
+        """
+        # If board is filled, board is trivially solved
+        if board.check_full_board():
+            return done(board)
 
+        # Iterate over every square in the board
+        for row in range(Sudoku.num_rows):
+            for col in range(Sudoku.num_columns):
 
+                # If square is empty, begin plugging in possible values
+                if board.check_empty_space(row, col):
+                    for val in range(1, 10):
+                        if not check_row(val, row) and \
+                           not check_col(val, col) and \
+                           not check_box(val, what_box(row, col)):
+                            board.board[row][col] = val
+                        
+                            if solve(board):
+                                return done(board)
+                        
+                            # Didn't work; undo assigment
+                            board.board[row][col] = ' '
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        # Bad path; backtrack
+        return False;
 
 #end of Michelle's space
 
