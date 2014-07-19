@@ -19,9 +19,9 @@ class Sudoku:
                 if (j == 3 or j == 6):
                     rowString += "| "
                 rowString += row[j] + " "
-            print rowString
+            print(rowString)
             if (i == 2 or i == 5):
-                print line
+                print(line)
 
     def get_board(self):
         return self.board
@@ -51,46 +51,90 @@ class Sudoku:
         for i in range(num_rows):
             result.append(self.board[i][num_col])
         return result
-
+        
+     
     def return_box(self, num):
-      """
+        """
         Returns a 3x3 subgrid of the board as a list.
         Board indexed as:
                             1 2 3
                             4 5 6
                             7 8 9,
         where each index represents a 3x3 subgrid.
-      """
+        """
+        
         result = []
         three = [0, 1, 2]
         for a in three:
             for b in three:
                 result += self.board[a+((num-1)//3*3)][b+(num%3-1)*3]
         return result
-
-    def check_3x3(self, box):
-      """Returns true iff the 3x3 subgrid BOX contains NUM."""
-
+    
     def place_num(self, num, row, column):
         self.board[row][column] = num
 
-    def generate_random_board(self):
-        # while min(count_list) > 9: #checks if there's a number not used 9 times
-        #   num_to_add = randrange(9) + 1
-        #   if self.count_list[num_to_add-1] !> 10:
-        #       if check_3x3(self.board):
-                    #put number in a place on the board
                           
 #Allan's space
 
- def check_box(self, num, box_num):
-    # this method checks if a specific box already has a specific number
-    # @self is the board object
-    # @num is the specific number being checked
-    # @box_num is the box number of the board in row major order, starting from 1
-    # @return returns true if the box already has the number, false otherwise       
-        box = self.return_box(self, box_num):
+    def check_box(self, num, box_num):
+        """
+        this method checks if a specific box already has a specific number
+        @self is the board object
+        @num is the specific number being checked
+        @box_num is the box number of the board in row major order, starting from 1
+        @return returns true if the box already has the number, false otherwise       
+        """
+        
+        box = self.return_box(box_num)
+        for board_num in box:
+            if num == board_num:
+                return true
+        return false
+        
+    def check_column(self, num, num_col):
+        """
+        same logic as check_box, except starting at 0 
+        """
+        col = self.return_col(num_col)
+        for board_num in col:
+            if num == board_num:
+                return true
+        return false
     
+    def check_row(self, num, num_row):
+        """
+        same logic as check
+        """
+        row = self.return_row(num_row)
+        for board_num in row:
+            if num == board_num:
+                return true
+        return false
+        
+    def what_box(self, i, j):
+        if i <= 2:
+            if j <= 2:
+                return 1
+            elif j <= 5:
+                return 2
+            else:
+                return 3
+        elif i <= 5:
+            if j <= 2:
+                return 4
+            elif j< 5:
+                return 5
+            else:
+                return 6
+        else:
+            if j <= 2:
+                return 7
+            elif j <= 5:
+                return 8
+            else:
+                return 9
+                
+          
 #end of Allan's space 
 
 #Michelle's space
