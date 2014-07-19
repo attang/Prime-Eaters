@@ -13,9 +13,23 @@ class Sudoku:
 	def get_board(self):
 		return self.board
 
-	def check_3x3(board):
-		'''checks whether the 3x3 grid has the number in it
+	def check_empty_space(board, row, column):
+		return self.board[row][column] == ' '
+
+	def check_full_board(self, board): #rows then columns
+		for row in self.board:
+			for column_of_row in row:
+				if column_of_row == ' '
+					return False
+		return True
+
+	def check_3x3(box, board):
+		'''checks whether the 3x3 grid (box) has the number in it
 			returns True or False'''
+
+
+	def place_num(board, num, row, column):
+
 
 	def generate_random_board(self):
 		while min(count_list) > 9: #checks if there's a number not used 9 times
