@@ -46,6 +46,15 @@ class Sudoku:
 				result += self.board[a+((num-1)//3*3)][b+(num%3-1)*3]
 		return result
 
+    def check_box(self, num, box_num):
+    # this method checks if a specific box already has a specific number
+    # @self is the board object
+    # @num is the specific number being checked
+    # @box_num is the box number of the board in row major order, starting from 1
+    # @return returns true if the box already has the number, false otherwise
+        
+        box = self.return_box(self, box_num):
+        
 
 	def check_3x3(self, box):
 		'''checks whether the 3x3 grid (box) has the number in it
